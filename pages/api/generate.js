@@ -33,7 +33,7 @@ export default async function (req, res) {
       max_tokens: 100,
       top_p: 0.8,
       n: 1,
-      stream: false,
+      // stream: false,
       logprobs: null,
 
     });
@@ -59,5 +59,5 @@ function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
     console.log(animal)
-  return `Suggérez une description complète et détaillée dans maximum 50 tokens  pour un objectif de commerce électronique pour le produit suivant : ${animal}`;
+  return `Suggérez une description complète et détaillée dans maximum 20 tokens  pour un objectif de commerce électronique pour le produit suivant : ${animal}`;
 }

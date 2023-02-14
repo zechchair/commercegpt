@@ -1,83 +1,35 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 565;
-exports.ids = [565];
+exports.id = "pages/api/generate";
+exports.ids = ["pages/api/generate"];
 exports.modules = {
 
-/***/ 961:
+/***/ "openai":
+/*!*************************!*\
+  !*** external "openai" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = require("openai");
+
+/***/ }),
+
+/***/ "(api)/./pages/api/generate.js":
+/*!*******************************!*\
+  !*** ./pages/api/generate.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ generate)
-});
-
-;// CONCATENATED MODULE: external "openai"
-const external_openai_namespaceObject = require("openai");
-;// CONCATENATED MODULE: ./pages/api/generate.js
-
-const configuration = new external_openai_namespaceObject.Configuration({
-    apiKey: process.env.OPENAI_API_KEY
-});
-const openai = new external_openai_namespaceObject.OpenAIApi(configuration);
-/* harmony default export */ async function generate(req, res) {
-    if (!configuration.apiKey) {
-        res.status(500).json({
-            error: {
-                message: "OpenAI API key not configured, please follow instructions in README.md"
-            }
-        });
-        return;
-    }
-    const animal = req.body.animal || "";
-    if (animal.trim().length === 0) {
-        res.status(400).json({
-            error: {
-                message: "Please enter a valid specs"
-            }
-        });
-        return;
-    }
-    try {
-        const completion = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: generatePrompt(animal),
-            temperature: 0.05,
-            max_tokens: 100,
-            top_p: 0.8,
-            n: 1,
-            stream: false,
-            logprobs: null
-        });
-        console.log(completion.data.choices);
-        res.status(200).json({
-            result: completion.data.choices[0].text
-        });
-    } catch (error) {
-        // Consider adjusting the error handling logic for your use case
-        if (error.response) {
-            console.error(error.response.status, error.response.data);
-            res.status(error.response.status).json(error.response.data);
-        } else {
-            console.error(`Error with OpenAI API request: ${error.message}`);
-            res.status(500).json({
-                error: {
-                    message: "An error occurred during your request."
-                }
-            });
-        }
-    }
-}
-function generatePrompt(animal) {
-    const capitalizedAnimal = animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-    console.log(animal);
-    return `Suggérez une description complète et détaillée dans maximum 50 tokens  pour un objectif de commerce électronique pour le produit suivant : ${animal}`;
-}
-
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var openai__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! openai */ \"openai\");\n/* harmony import */ var openai__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(openai__WEBPACK_IMPORTED_MODULE_0__);\n\nconst configuration = new openai__WEBPACK_IMPORTED_MODULE_0__.Configuration({\n    apiKey: process.env.OPENAI_API_KEY\n});\nconst openai = new openai__WEBPACK_IMPORTED_MODULE_0__.OpenAIApi(configuration);\n/* harmony default export */ async function __WEBPACK_DEFAULT_EXPORT__(req, res) {\n    if (!configuration.apiKey) {\n        res.status(500).json({\n            error: {\n                message: \"OpenAI API key not configured, please follow instructions in README.md\"\n            }\n        });\n        return;\n    }\n    const animal = req.body.animal || \"\";\n    if (animal.trim().length === 0) {\n        res.status(400).json({\n            error: {\n                message: \"Please enter a valid specs\"\n            }\n        });\n        return;\n    }\n    try {\n        const completion = await openai.createCompletion({\n            model: \"text-davinci-003\",\n            prompt: generatePrompt(animal),\n            temperature: 0.05,\n            max_tokens: 100,\n            top_p: 0.8,\n            n: 1,\n            // stream: false,\n            logprobs: null\n        });\n        console.log(completion.data.choices);\n        res.status(200).json({\n            result: completion.data.choices[0].text\n        });\n    } catch (error) {\n        // Consider adjusting the error handling logic for your use case\n        if (error.response) {\n            console.error(error.response.status, error.response.data);\n            res.status(error.response.status).json(error.response.data);\n        } else {\n            console.error(`Error with OpenAI API request: ${error.message}`);\n            res.status(500).json({\n                error: {\n                    message: \"An error occurred during your request.\"\n                }\n            });\n        }\n    }\n}\nfunction generatePrompt(animal) {\n    const capitalizedAnimal = animal[0].toUpperCase() + animal.slice(1).toLowerCase();\n    console.log(animal);\n    return `Suggérez une description complète et détaillée dans maximum 20 tokens  pour un objectif de commerce électronique pour le produit suivant : ${animal}`;\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvZ2VuZXJhdGUuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQWtEO0FBRWxELE1BQU1FLGdCQUFnQixJQUFJRixpREFBYUEsQ0FBQztJQUN0Q0csUUFBUUMsUUFBUUMsR0FBRyxDQUFDQyxjQUFjO0FBQ3BDO0FBQ0EsTUFBTUMsU0FBUyxJQUFJTiw2Q0FBU0EsQ0FBQ0M7QUFFN0IsNkJBQWUsMENBQWdCTSxHQUFHLEVBQUVDLEdBQUcsRUFBRTtJQUN2QyxJQUFJLENBQUNQLGNBQWNDLE1BQU0sRUFBRTtRQUN6Qk0sSUFBSUMsTUFBTSxDQUFDLEtBQUtDLElBQUksQ0FBQztZQUNuQkMsT0FBTztnQkFDTEMsU0FBUztZQUNYO1FBQ0Y7UUFDQTtJQUNGLENBQUM7SUFFRCxNQUFNQyxTQUFTTixJQUFJTyxJQUFJLENBQUNELE1BQU0sSUFBSTtJQUNsQyxJQUFJQSxPQUFPRSxJQUFJLEdBQUdDLE1BQU0sS0FBSyxHQUFHO1FBQzlCUixJQUFJQyxNQUFNLENBQUMsS0FBS0MsSUFBSSxDQUFDO1lBQ25CQyxPQUFPO2dCQUNMQyxTQUFTO1lBQ1g7UUFDRjtRQUNBO0lBQ0YsQ0FBQztJQUVELElBQUk7UUFDRixNQUFNSyxhQUFhLE1BQU1YLE9BQU9ZLGdCQUFnQixDQUFDO1lBQy9DQyxPQUFPO1lBQ1BDLFFBQVFDLGVBQWVSO1lBQ3ZCUyxhQUFhO1lBQ2JDLFlBQVk7WUFDWkMsT0FBTztZQUNQQyxHQUFHO1lBQ0gsaUJBQWlCO1lBQ2pCQyxVQUFVLElBQUk7UUFFaEI7UUFDQUMsUUFBUUMsR0FBRyxDQUFDWCxXQUFXWSxJQUFJLENBQUNDLE9BQU87UUFDbkN0QixJQUFJQyxNQUFNLENBQUMsS0FBS0MsSUFBSSxDQUFDO1lBQUVxQixRQUFRZCxXQUFXWSxJQUFJLENBQUNDLE9BQU8sQ0FBQyxFQUFFLENBQUNFLElBQUk7UUFBQztJQUNqRSxFQUFFLE9BQU1yQixPQUFPO1FBQ2IsZ0VBQWdFO1FBQ2hFLElBQUlBLE1BQU1zQixRQUFRLEVBQUU7WUFDbEJOLFFBQVFoQixLQUFLLENBQUNBLE1BQU1zQixRQUFRLENBQUN4QixNQUFNLEVBQUVFLE1BQU1zQixRQUFRLENBQUNKLElBQUk7WUFDeERyQixJQUFJQyxNQUFNLENBQUNFLE1BQU1zQixRQUFRLENBQUN4QixNQUFNLEVBQUVDLElBQUksQ0FBQ0MsTUFBTXNCLFFBQVEsQ0FBQ0osSUFBSTtRQUM1RCxPQUFPO1lBQ0xGLFFBQVFoQixLQUFLLENBQUMsQ0FBQywrQkFBK0IsRUFBRUEsTUFBTUMsT0FBTyxDQUFDLENBQUM7WUFDL0RKLElBQUlDLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7Z0JBQ25CQyxPQUFPO29CQUNMQyxTQUFTO2dCQUNYO1lBQ0Y7UUFDRixDQUFDO0lBQ0g7QUFDRixDQUFDO0FBRUQsU0FBU1MsZUFBZVIsTUFBTSxFQUFFO0lBQzlCLE1BQU1xQixvQkFDSnJCLE1BQU0sQ0FBQyxFQUFFLENBQUNzQixXQUFXLEtBQUt0QixPQUFPdUIsS0FBSyxDQUFDLEdBQUdDLFdBQVc7SUFDckRWLFFBQVFDLEdBQUcsQ0FBQ2Y7SUFDZCxPQUFPLENBQUMsMklBQTJJLEVBQUVBLE9BQU8sQ0FBQztBQUMvSiIsInNvdXJjZXMiOlsid2VicGFjazovL29wZW5haS1xdWlja3N0YXJ0LW5vZGUvLi9wYWdlcy9hcGkvZ2VuZXJhdGUuanM/NjI3YyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb25maWd1cmF0aW9uLCBPcGVuQUlBcGkgfSBmcm9tIFwib3BlbmFpXCI7XG5cbmNvbnN0IGNvbmZpZ3VyYXRpb24gPSBuZXcgQ29uZmlndXJhdGlvbih7XG4gIGFwaUtleTogcHJvY2Vzcy5lbnYuT1BFTkFJX0FQSV9LRVksXG59KTtcbmNvbnN0IG9wZW5haSA9IG5ldyBPcGVuQUlBcGkoY29uZmlndXJhdGlvbik7XG5cbmV4cG9ydCBkZWZhdWx0IGFzeW5jIGZ1bmN0aW9uIChyZXEsIHJlcykge1xuICBpZiAoIWNvbmZpZ3VyYXRpb24uYXBpS2V5KSB7XG4gICAgcmVzLnN0YXR1cyg1MDApLmpzb24oe1xuICAgICAgZXJyb3I6IHtcbiAgICAgICAgbWVzc2FnZTogXCJPcGVuQUkgQVBJIGtleSBub3QgY29uZmlndXJlZCwgcGxlYXNlIGZvbGxvdyBpbnN0cnVjdGlvbnMgaW4gUkVBRE1FLm1kXCIsXG4gICAgICB9XG4gICAgfSk7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgY29uc3QgYW5pbWFsID0gcmVxLmJvZHkuYW5pbWFsIHx8ICcnO1xuICBpZiAoYW5pbWFsLnRyaW0oKS5sZW5ndGggPT09IDApIHtcbiAgICByZXMuc3RhdHVzKDQwMCkuanNvbih7XG4gICAgICBlcnJvcjoge1xuICAgICAgICBtZXNzYWdlOiBcIlBsZWFzZSBlbnRlciBhIHZhbGlkIHNwZWNzXCIsXG4gICAgICB9XG4gICAgfSk7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgdHJ5IHtcbiAgICBjb25zdCBjb21wbGV0aW9uID0gYXdhaXQgb3BlbmFpLmNyZWF0ZUNvbXBsZXRpb24oe1xuICAgICAgbW9kZWw6IFwidGV4dC1kYXZpbmNpLTAwM1wiLFxuICAgICAgcHJvbXB0OiBnZW5lcmF0ZVByb21wdChhbmltYWwpLFxuICAgICAgdGVtcGVyYXR1cmU6IDAuMDUsXG4gICAgICBtYXhfdG9rZW5zOiAxMDAsXG4gICAgICB0b3BfcDogMC44LFxuICAgICAgbjogMSxcbiAgICAgIC8vIHN0cmVhbTogZmFsc2UsXG4gICAgICBsb2dwcm9iczogbnVsbCxcblxuICAgIH0pO1xuICAgIGNvbnNvbGUubG9nKGNvbXBsZXRpb24uZGF0YS5jaG9pY2VzKVxuICAgIHJlcy5zdGF0dXMoMjAwKS5qc29uKHsgcmVzdWx0OiBjb21wbGV0aW9uLmRhdGEuY2hvaWNlc1swXS50ZXh0IH0pO1xuICB9IGNhdGNoKGVycm9yKSB7XG4gICAgLy8gQ29uc2lkZXIgYWRqdXN0aW5nIHRoZSBlcnJvciBoYW5kbGluZyBsb2dpYyBmb3IgeW91ciB1c2UgY2FzZVxuICAgIGlmIChlcnJvci5yZXNwb25zZSkge1xuICAgICAgY29uc29sZS5lcnJvcihlcnJvci5yZXNwb25zZS5zdGF0dXMsIGVycm9yLnJlc3BvbnNlLmRhdGEpO1xuICAgICAgcmVzLnN0YXR1cyhlcnJvci5yZXNwb25zZS5zdGF0dXMpLmpzb24oZXJyb3IucmVzcG9uc2UuZGF0YSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIGNvbnNvbGUuZXJyb3IoYEVycm9yIHdpdGggT3BlbkFJIEFQSSByZXF1ZXN0OiAke2Vycm9yLm1lc3NhZ2V9YCk7XG4gICAgICByZXMuc3RhdHVzKDUwMCkuanNvbih7XG4gICAgICAgIGVycm9yOiB7XG4gICAgICAgICAgbWVzc2FnZTogJ0FuIGVycm9yIG9jY3VycmVkIGR1cmluZyB5b3VyIHJlcXVlc3QuJyxcbiAgICAgICAgfVxuICAgICAgfSk7XG4gICAgfVxuICB9XG59XG5cbmZ1bmN0aW9uIGdlbmVyYXRlUHJvbXB0KGFuaW1hbCkge1xuICBjb25zdCBjYXBpdGFsaXplZEFuaW1hbCA9XG4gICAgYW5pbWFsWzBdLnRvVXBwZXJDYXNlKCkgKyBhbmltYWwuc2xpY2UoMSkudG9Mb3dlckNhc2UoKTtcbiAgICBjb25zb2xlLmxvZyhhbmltYWwpXG4gIHJldHVybiBgU3VnZ8OpcmV6IHVuZSBkZXNjcmlwdGlvbiBjb21wbMOodGUgZXQgZMOpdGFpbGzDqWUgZGFucyBtYXhpbXVtIDIwIHRva2VucyAgcG91ciB1biBvYmplY3RpZiBkZSBjb21tZXJjZSDDqWxlY3Ryb25pcXVlIHBvdXIgbGUgcHJvZHVpdCBzdWl2YW50IDogJHthbmltYWx9YDtcbn1cbiJdLCJuYW1lcyI6WyJDb25maWd1cmF0aW9uIiwiT3BlbkFJQXBpIiwiY29uZmlndXJhdGlvbiIsImFwaUtleSIsInByb2Nlc3MiLCJlbnYiLCJPUEVOQUlfQVBJX0tFWSIsIm9wZW5haSIsInJlcSIsInJlcyIsInN0YXR1cyIsImpzb24iLCJlcnJvciIsIm1lc3NhZ2UiLCJhbmltYWwiLCJib2R5IiwidHJpbSIsImxlbmd0aCIsImNvbXBsZXRpb24iLCJjcmVhdGVDb21wbGV0aW9uIiwibW9kZWwiLCJwcm9tcHQiLCJnZW5lcmF0ZVByb21wdCIsInRlbXBlcmF0dXJlIiwibWF4X3Rva2VucyIsInRvcF9wIiwibiIsImxvZ3Byb2JzIiwiY29uc29sZSIsImxvZyIsImRhdGEiLCJjaG9pY2VzIiwicmVzdWx0IiwidGV4dCIsInJlc3BvbnNlIiwiY2FwaXRhbGl6ZWRBbmltYWwiLCJ0b1VwcGVyQ2FzZSIsInNsaWNlIiwidG9Mb3dlckNhc2UiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api)/./pages/api/generate.js\n");
 
 /***/ })
 
@@ -88,7 +40,7 @@ function generatePrompt(animal) {
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(961));
+var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/generate.js"));
 module.exports = __webpack_exports__;
 
 })();
